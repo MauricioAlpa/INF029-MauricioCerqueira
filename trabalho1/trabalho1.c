@@ -433,35 +433,54 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = 0;
     int tamBusca = strlen(strBusca);
+    int posicaoCaractere = 0; 
 
-    if (tamBusca == 0) return 0;
+    if (tamBusca == 0)
+    {
+        return 0;
+    }
 
-    for (int i = 0; strTexto[i] != '\0'; i++) {
+    for (int i = 0; strTexto[i] != '\0'; i++)
+    {
+        if (((unsigned char)strTexto[i] & 0xC0) != 0x80){
+            posicaoCaractere++;
+        }
+
         int corresponde = 0;
-        int k = i, j = 0;
+        int k = i;
+        int j = 0;
 
-        
-        while (strTexto[k] != '\0' && strBusca[j] != '\0' && strTexto[k] == strBusca[j]) {
+
+        while (strTexto[k] != '\0' && strBusca[j] != '\0' && strTexto[k] == strBusca[j]){
             corresponde++;
             j++;
             k++;
         }
 
-            
-        if (corresponde == tamBusca) {
-            int posicaoInicial = i + 1; 
-            int posicaoFinal = k;       
+        if (corresponde == tamBusca){
+ 
+            int posicaoInicial = posicaoCaractere;
 
-        
-            posicoes[qtdOcorrencias * 2] = posicaoInicial;
-            posicoes[qtdOcorrencias * 2 + 1] = posicaoFinal;
+            int caracteresBusca = 0;
+
+            for (int x = 0; strBusca[x] != '\0'; x++){
+                if (((unsigned char)strBusca[x] & 0xC0) != 0x80)
+                {
+                    caracteresBusca++;
+                }
+            }
+
+            int posicaoFinal = posicaoInicial + caracteresBusca - 1;
+
+            if (qtdOcorrencias < 15){
+                posicoes[qtdOcorrencias * 2] = posicaoInicial;
+                posicoes[qtdOcorrencias * 2 + 1] = posicaoFinal;
+            }
 
             qtdOcorrencias++;
         }
     }
-
     return qtdOcorrencias;
-
 }
 
 /*
@@ -476,8 +495,17 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 
 int q5(int num)
 {
+    int aux;
+    int invertido = 0;
 
-    return num;
+    while (num != 0)
+    {
+        aux = num % 10;
+        invertido = invertido * 10 + aux;
+        num = num / 10;
+    }
+
+    return invertido;
 }
 
 /*
@@ -492,7 +520,34 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+    int qtdOcorrencias = 0;
+
+    char strBase[20];
+    char strBusca[20];
+
+
+    snprintf(strBase, sizeof(strBase), "%d", numerobase);
+    snprintf(strBusca, sizeof(strBusca), "%d", numerobusca);
+
+    int tamBase = strlen(strBase);
+    int tamBusca = strlen(strBusca);
+
+
+    if (tamBusca > tamBase)
+    {
+        return 0;
+    }
+
+
+    for (int i = 0; i <= tamBase - tamBusca; i++)
+    {
+
+        if (strncmp(&strBase[i], strBusca, tamBusca) == 0)
+        {
+            qtdOcorrencias++;
+        }
+    }
+
     return qtdOcorrencias;
 }
 
