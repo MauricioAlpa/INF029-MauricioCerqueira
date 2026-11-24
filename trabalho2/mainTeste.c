@@ -11,12 +11,15 @@ void testeInserirComEstrutura();
 void testeExcluir();
 void testeExcluirNumeroEspecifico();
 void testeListar();
+/*
 void testeRetornarTodosNumeros();
 void testeMudarTamanhoEstrutura();
 void testeListaEncadeada();
+*/
 
 int main()
 {
+    
     inicializar();
     testeInserirSemNada();
     testeCriarEstrutura();
@@ -24,10 +27,13 @@ int main()
     testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
+    /*
     testeRetornarTodosNumeros();
     testeMudarTamanhoEstrutura();
-    testeListaEncadeada();
+    testeListaEncadeada()
+    */
     finalizar();
+    
 }
 int ligado = 0;
 void show_log(char *str)

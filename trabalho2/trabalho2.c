@@ -53,11 +53,11 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     int retorno = 0;
     int posicao_invalida = 0;
 
-    posicao_invalida = ehPosicaoValida(posicao)
+    posicao_invalida = ehPosicaoValida(posicao);
 
-    if (posicao_invalida)
-        retorno = POSICAO_INVALIDA;
-    else
+    if (posicao_invalida == POSICAO_INVALIDA){
+        return POSICAO_INVALIDA;
+    }else
     {
 
         // testar se existe a estrutura auxiliar
@@ -67,20 +67,18 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             {
                 auxiliares[posicao - 1].nums[auxiliares[posicao-1].qtd] = valor;
                 auxiliares[posicao - 1].qtd++;
-                retorno = SUCESSO;
+                return SUCESSO;
             }
             else
             {
-                retorno = SEM_ESPACO;
+                return SEM_ESPACO;
             }
         }
         else
         {
-            retorno = SEM_ESTRUTURA_AUXILIAR;
+            return SEM_ESTRUTURA_AUXILIAR;
         }
     }
-
-    return retorno;
 }
 
 /*
@@ -129,8 +127,34 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
-    int retorno = SUCESSO;
-    return retorno;
+    if(posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
+
+    if (auxiliares[posicao - 1].nums == NULL) {
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
+
+    if(auxiliares[posicao - 1].qtd == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
+    }
+
+    for(int i = 0; i < auxiliares[posicao - 1].qtd; i++){
+
+        if(valor == auxiliares[posicao - 1].nums[i]){
+
+            for(int j = i; j < auxiliares[posicao - 1].qtd - 1; j++){
+                auxiliares[posicao - 1].nums[j] = auxiliares[posicao - 1].nums[j + 1];
+            }
+            auxiliares[posicao - 1].qtd--;
+            return SUCESSO;
+        }
+    }
+
+    return NUMERO_INEXISTENTE;
+
+    
 }
 
 // se posição é um valor válido {entre 1 e 10}
@@ -158,9 +182,19 @@ Retorno (int)
 int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
 
-    int retorno = 0;
+    if(posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
 
-    return retorno;
+    if (auxiliares[posicao - 1].nums == NULL) {
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
+    for(int i = 0; i < auxiliares[posicao - 1].qtd; i++){
+        vetorAux[i] = auxiliares[posicao - 1].nums[i];
+    }
+
+    return SUCESSO;
 }
 
 /*
@@ -175,10 +209,33 @@ Rertono (int)
 int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
 
-    int retorno = 0;
+    if(posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
 
+    if (auxiliares[posicao - 1].nums == NULL) {
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
+
+    for(int i = 0; i < auxiliares[posicao - 1].qtd; i++){
+        vetorAux[i] = auxiliares[posicao - 1].nums[i];
+    }
     
-    return retorno;
+    for(int i = 1; i < auxiliares[posicao - 1].qtd; i++){
+        int chave = vetorAux[i];
+        int j = i - 1;
+
+        while(j >= 0 && vetorAux[j] > chave){
+            vetorAux[j + 1] = vetorAux[j];
+            j--;
+        }
+
+        vetorAux[j + 1] = chave;
+    }
+
+    return SUCESSO;
+
 }
 
 /*
@@ -295,4 +352,14 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 
 void finalizar()
 {
+    for (int i = 0; i < TAM; i++)
+        {
+            if (auxiliares[i].nums != NULL)
+            {
+                free(auxiliares[i].nums);
+                auxiliares[i].nums = NULL;
+                auxiliares[i].qtd = 0;
+                auxiliares[i].max_tam = 0;
+            }
+        }
 }
