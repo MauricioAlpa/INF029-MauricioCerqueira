@@ -4,39 +4,37 @@
 
 #include "trabalho2.h"
 
+EstruturaAuxiliar auxiliares[TAM];
 
-int *auxiliares[TAM];
 
-/*
-Objetivo: criar estrutura auxiliar na posição 'posicao'.
-com tamanho 'tamanho'
+int ehPosicaoValida(int posicao);
 
-Rertono (int)
-    SUCESSO - criado com sucesso
-    JA_TEM_ESTRUTURA_AUXILIAR - já tem estrutura na posição
-    POSICAO_INVALIDA - Posição inválida para estrutura auxiliar
-    SEM_ESPACO_DE_MEMORIA - Sem espaço de memória
-    TAMANHO_INVALIDO - o tamanho deve ser maior ou igual a 1
-*/
 int criarEstruturaAuxiliar(int posicao, int tamanho)
 {
 
-    retorno = JA_TEM_ESTRUTURA_AUXILIAR;
-    if(auxiliares[posicao] != NULL)
-        return JA_TEM_ESTRUTURA_AUXILIAR;
-
-    retorno = POSICAO_INVALIDA;
-    if(posicao < 0 || posicao > 10)
+    if (ehPosicaoValida(posicao) == POSICAO_INVALIDA) {
         return POSICAO_INVALIDA;
+    }
 
-    auxiliares[posicao] = (int *) malloc(sizeof(int));
-    if(auxiliares[posicao] == NULL)
-        return SEM_ESPACO_DE_MEMORIA;
-    
-    if(tamanho < 1)
+  
+    int i = posicao - 1;
+
+    if (auxiliares[i].nums != NULL) {
+        return JA_TEM_ESTRUTURA_AUXILIAR;
+    }
+
+    if (tamanho < 1) {
         return TAMANHO_INVALIDO;
-    // deu tudo certo, crie
+    }
+
+    auxiliares[i].nums = (int *) malloc(sizeof(int) * tamanho);
+    if (auxiliares[i].nums == NULL) {
+        return SEM_ESPACO_DE_MEMORIA;
+    }
+
     
+    auxiliares[i].max_tam = tamanho;
+    auxiliares[i].qtd = 0;
 
     return SUCESSO;
 }
@@ -53,20 +51,22 @@ CONSTANTES
 int inserirNumeroEmEstrutura(int posicao, int valor)
 {
     int retorno = 0;
-    int existeEstruturaAuxiliar = 0;
-    int temEspaco = 0;
     int posicao_invalida = 0;
+
+    posicao_invalida = ehPosicaoValida(posicao)
 
     if (posicao_invalida)
         retorno = POSICAO_INVALIDA;
     else
     {
+
         // testar se existe a estrutura auxiliar
-        if (existeEstruturaAuxiliar)
+        if (auxiliares[posicao - 1].nums != NULL)
         {
-            if (temEspaco)
+            if (auxiliares[posicao - 1].qtd < auxiliares[posicao - 1].max_tam)
             {
-                //insere
+                auxiliares[posicao - 1].nums[auxiliares[posicao-1].qtd] = valor;
+                auxiliares[posicao - 1].qtd++;
                 retorno = SUCESSO;
             }
             else
@@ -96,8 +96,22 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
-    int retorno = SUCESSO;
-    return retorno;
+
+    if(posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
+
+    if (auxiliares[posicao - 1].nums == NULL) {
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
+
+    if(auxiliares[posicao - 1].qtd == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
+    }else{
+        auxiliares[posicao - 1].qtd--;
+        return SUCESSO;
+    }
 }
 
 /*
