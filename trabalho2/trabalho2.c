@@ -248,11 +248,29 @@ Rertono (int)
 */
 int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
+    int naoVazias = 0, indiceVetorAux = 0;
 
-    int retorno = 0;
-    return retorno;
+    for(int i = 0; i < TAM && !naoVazias; i++){
+        if(auxiliares[i].qtd != 0){
+            naoVazias = 1;
+        }
+    }
+
+    if(naoVazias){
+
+        for(int i = 0; i < TAM; i++){
+            for(int j = 0; j < auxiliares[i].qtd; j++){
+                vetorAux[indiceVetorAux] = auxiliares[i].nums[j];
+                indiceVetorAux++;
+            }
+        }
+        return SUCESSO;
+
+    }else{
+        return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+    }
 }
-
+    
 /*
 Objetivo: retorna os números ordenados de todas as estruturas auxiliares.
 os números devem ser armazenados em vetorAux
@@ -263,9 +281,38 @@ Rertono (int)
 */
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
+    int naoVazias = 0, indiceVetorAux = 0;
 
-    int retorno = 0;
-    return retorno;
+    for(int i = 0; i < TAM && !naoVazias; i++){
+        if(auxiliares[i].qtd != 0){
+            naoVazias = 1;
+        }
+    }
+    
+    if(naoVazias){
+        for(int i = 0; i < TAM; i++){
+            for(int j = 0; j < auxiliares[i].qtd; j++){
+                vetorAux[indiceVetorAux] = auxiliares[i].nums[j];
+                indiceVetorAux++;
+            }
+        }
+
+        for(int i = 1; i < indiceVetorAux; i++){
+            int chave = vetorAux[i];
+            int j = i - 1;
+
+            while(j >= 0 && vetorAux[j] > chave){
+                vetorAux[j + 1] = vetorAux[j];
+                j--;
+            }
+
+            vetorAux[j + 1] = chave;
+        }
+
+        return SUCESSO;
+    }else{
+        return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+    }
 }
 
 /*
@@ -280,10 +327,39 @@ Rertono (int)
     SEM_ESPACO_DE_MEMORIA - erro na alocação do novo valor
 */
 int modificarTamanhoEstruturaAuxiliar(int posicao, int novoTamanho)
-{
+{   
+    if(posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
 
-    int retorno = 0;
-    return retorno;
+    if (auxiliares[posicao - 1].nums == NULL) {
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+    
+    int nTamanho = auxiliares[posicao - 1].max_tam + novoTamanho;
+
+    if(nTamanho < 1){
+        return NOVO_TAMANHO_INVALIDO;
+    }
+
+
+
+    
+    int *tempVet = realloc(auxiliares[posicao - 1].nums, nTamanho * sizeof(int));
+
+
+    if(tempVet == NULL){
+        return SEM_ESPACO_DE_MEMORIA;
+    }
+
+    auxiliares[posicao - 1].nums = tempVet;
+    auxiliares[posicao - 1].max_tam = nTamanho;
+
+    if (auxiliares[posicao -1].qtd > nTamanho) {
+        auxiliares[posicao - 1].qtd = nTamanho;
+    }
+
+    return SUCESSO;
 }
 
 /*
@@ -298,9 +374,19 @@ Retorno (int)
 int getQuantidadeElementosEstruturaAuxiliar(int posicao)
 {
 
-    int retorno = 0;
+    if(posicao < 1 || posicao > 10){
+        return POSICAO_INVALIDA;
+    }
 
-    return retorno;
+    if (auxiliares[posicao - 1].nums == NULL) {
+        return SEM_ESTRUTURA_AUXILIAR;
+    }
+
+    if(auxiliares[posicao - 1].qtd == 0){
+        return ESTRUTURA_AUXILIAR_VAZIA;
+    }
+
+    return auxiliares[posicao - 1].qtd;
 }
 
 /*
@@ -312,8 +398,7 @@ Retorno (No*)
 */
 No *montarListaEncadeadaComCabecote()
 {
-
-    return NULL;
+    
 }
 
 /*
