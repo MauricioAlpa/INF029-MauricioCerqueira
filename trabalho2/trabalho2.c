@@ -398,8 +398,44 @@ Retorno (No*)
 */
 No *montarListaEncadeadaComCabecote()
 {
+    No *listaCabecote = (No *) malloc(sizeof(No));
     
+
+    if(listaCabecote == NULL){
+        return NULL;
+    }
+
+    listaCabecote->prox = NULL;
+
+    No *ultimo = listaCabecote;
+
+    for(int i = 0; i < TAM; i++){
+        for(int j = 0; j < auxiliares[i].qtd; j++){
+            No *novo = (No *) malloc(sizeof(No));
+
+            if(novo == NULL){
+                destruirListaEncadeadaComCabecote(&listaCabecote);
+                return NULL;
+            }
+
+            novo->conteudo = auxiliares[i].nums[j];
+            novo->prox = NULL;
+
+            ultimo->prox = novo;   
+            ultimo = novo;         
+        }
+    }
+
+    if (listaCabecote->prox == NULL) {
+        free(listaCabecote);
+        return NULL;
+    }
+
+
+    return listaCabecote;
 }
+
+ 
 
 /*
 Objetivo: retorna os números da lista enceada com cabeçote armazenando em vetorAux.
@@ -407,6 +443,15 @@ Retorno void
 */
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[])
 {
+    if (inicio == NULL) {
+        return;                      // lista vazia, nada a copiar
+    }
+
+    int k = 0;
+    
+    for (No *atual = inicio->prox; atual != NULL; atual = atual->prox) {
+        vetorAux[k++] = atual->conteudo;
+    }
 }
 
 /*
@@ -418,6 +463,16 @@ Retorno
 */
 void destruirListaEncadeadaComCabecote(No **inicio)
 {
+
+    No *atual = *inicio;
+
+    while (atual != NULL) {
+        No *proximo = atual->prox;   // guarda ANTES de liberar
+        free(atual);
+        atual = proximo;
+    }
+
+    *inicio = NULL;                 
 }
 
 /*

@@ -27,9 +27,7 @@ int main()
     testeListar();
     testeRetornarTodosNumeros();
     testeMudarTamanhoEstrutura();
-    /*
-    testeListaEncadeada()
-    */
+    testeListaEncadeada();
     finalizar();
     
 }
