@@ -1,33 +1,33 @@
 // #################################################
 //  Instituto Federal da Bahia
 //  Salvador - BA
-//  Curso de Análise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
-//  Disciplina: INF029 - Laboratório de Programação
+//  Curso de Anï¿½lise e Desenvolvimento de Sistemas http://ads.ifba.edu.br
+//  Disciplina: INF029 - Laboratï¿½rio de Programaï¿½ï¿½o
 //  Professor: Renato Novais - renato@ifba.edu.br
 
-//  ----- Orientações gerais -----
-//  Descrição: esse arquivo deve conter as questões do trabalho do aluno.
-//  O aluno deve preencher seus dados abaixo, e implementar as questões do trabalho
+//  ----- Orientaï¿½ï¿½es gerais -----
+//  Descriï¿½ï¿½o: esse arquivo deve conter as questï¿½es do trabalho do aluno.
+//  O aluno deve preencher seus dados abaixo, e implementar as questï¿½es do trabalho
 
 //  ----- Dados do Aluno -----
 //  Nome:Mauricio Cerqueira Cerqueira Santos    
 //  email:mauriciocerqueira04@gmail.com
-//  Matrícula:20261160032
+//  Matrï¿½cula:20261160032
 //  Semestre:2
 
-//  Copyright © 2016 Renato Novais. All rights reserved.
-// Última atualização: 07/05/2021 - 19/08/2016 - 17/10/2025
+//  Copyright ï¿½ 2016 Renato Novais. All rights reserved.
+// ï¿½ltima atualizaï¿½ï¿½o: 07/05/2021 - 19/08/2016 - 17/10/2025
 
 // #################################################
 
 #include <stdio.h>
-#include <trabalho1.h> 
+#include "trabalho1.h" 
 
 
 DataQuebrada quebraData(char data[]);
 
 /*
-## função utilizada para testes  ##
+## funï¿½ï¿½o utilizada para testes  ##
 
  somar = somar dois valores
 @objetivo
@@ -45,18 +45,18 @@ int somar(int x, int y)
 }
 
 /*
-## função utilizada para testes  ##
+## funï¿½ï¿½o utilizada para testes  ##
 
- fatorial = fatorial de um número
+ fatorial = fatorial de um nï¿½mero
 @objetivo
-    calcular o fatorial de um número
+    calcular o fatorial de um nï¿½mero
 @entrada
     um inteiro x
 @saida
     fatorial de x -> x!
  */
 int fatorial(int x)
-{ //função utilizada para testes
+{ //funï¿½ï¿½o utilizada para testes
   int i, fat = 1;
     
   for (i = x; i > 1; i--)
@@ -81,12 +81,12 @@ int teste(int a)
 @objetivo
     Validar uma data
 @entrada
-    uma string data. Formatos que devem ser aceitos: dd/mm/aaaa, onde dd = dia, mm = mês, e aaaa, igual ao ano. dd em mm podem ter apenas um digito, e aaaa podem ter apenas dois digitos.
+    uma string data. Formatos que devem ser aceitos: dd/mm/aaaa, onde dd = dia, mm = mï¿½s, e aaaa, igual ao ano. dd em mm podem ter apenas um digito, e aaaa podem ter apenas dois digitos.
 @saida
-    0 -> se data inválida
-    1 -> se data válida
- @restrições
-    Não utilizar funções próprias de string (ex: strtok)   
+    0 -> se data invï¿½lida
+    1 -> se data vï¿½lida
+ @restriï¿½ï¿½es
+    Nï¿½o utilizar funï¿½ï¿½es prï¿½prias de string (ex: strtok)   
     pode utilizar strlen para pegar o tamanho da string
  */
 int q1(char data[])
@@ -243,23 +243,23 @@ int q1(char data[])
 
 
 /*
- Q2 = diferença entre duas datas
+ Q2 = diferenï¿½a entre duas datas
  @objetivo
-    Calcular a diferença em anos, meses e dias entre duas datas
+    Calcular a diferenï¿½a em anos, meses e dias entre duas datas
  @entrada
     uma string datainicial, uma string datafinal. 
  @saida
-    Retorna um tipo DiasMesesAnos. No atributo retorno, deve ter os possíveis valores abaixo
-    1 -> cálculo de diferença realizado com sucesso
-    2 -> datainicial inválida
-    3 -> datafinal inválida
+    Retorna um tipo DiasMesesAnos. No atributo retorno, deve ter os possï¿½veis valores abaixo
+    1 -> cï¿½lculo de diferenï¿½a realizado com sucesso
+    2 -> datainicial invï¿½lida
+    3 -> datafinal invï¿½lida
     4 -> datainicial > datafinal
-    Caso o cálculo esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos com os valores correspondentes.
+    Caso o cï¿½lculo esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos com os valores correspondentes.
  */
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
 
-    //calcule os dados e armazene nas três variáveis a seguir
+    //calcule os dados e armazene nas trï¿½s variï¿½veis a seguir
     DiasMesesAnos dma;
 
     if (q1(datainicial) == 0){
@@ -323,7 +323,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
 
         dF.valido = 1;
 
-      //verifique se a data final não é menor que a data inicial
+      //verifique se a data final nï¿½o ï¿½ menor que a data inicial
 
         if(dF.iAno < dI.iAno || (dF.iAno == dI.iAno && dF.iMes < dI.iMes) || (dF.iAno == dI.iAno && dF.iMes == dI.iMes && dF.iDia < dI.iDia)){
             dma.retorno = 4;
@@ -377,10 +377,10 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
  @objetivo
     Pesquisar quantas vezes um determinado caracter ocorre em um texto
  @entrada
-    uma string texto, um caracter c e um inteiro que informa se é uma pesquisa Case Sensitive ou não. Se isCaseSensitive = 1, a pesquisa deve considerar diferenças entre maiúsculos e minúsculos.
-        Se isCaseSensitive != 1, a pesquisa não deve  considerar diferenças entre maiúsculos e minúsculos.
+    uma string texto, um caracter c e um inteiro que informa se ï¿½ uma pesquisa Case Sensitive ou nï¿½o. Se isCaseSensitive = 1, a pesquisa deve considerar diferenï¿½as entre maiï¿½sculos e minï¿½sculos.
+        Se isCaseSensitive != 1, a pesquisa nï¿½o deve  considerar diferenï¿½as entre maiï¿½sculos e minï¿½sculos.
  @saida
-    Um número n >= 0.
+    Um nï¿½mero n >= 0.
  */
 int q3(char *texto, char c, int isCaseSensitive)
 {
@@ -417,16 +417,16 @@ int q3(char *texto, char c, int isCaseSensitive)
 /*
  Q4 = encontrar palavra em texto
  @objetivo
-    Pesquisar todas as ocorrências de uma palavra em um texto
+    Pesquisar todas as ocorrï¿½ncias de uma palavra em um texto
  @entrada
-    uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irá guardar as posições de início e fim de cada ocorrência da palavra (strBusca) no texto base (texto).
+    uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irï¿½ guardar as posiï¿½ï¿½es de inï¿½cio e fim de cada ocorrï¿½ncia da palavra (strBusca) no texto base (texto).
  @saida
-    Um número n >= 0 correspondente a quantidade de ocorrências encontradas.
-    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente. Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, deve ser preenchido com o índice de fim da ocorrencias. Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como há uma ocorrência da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
+    Um nï¿½mero n >= 0 correspondente a quantidade de ocorrï¿½ncias encontradas.
+    O vetor posicoes deve ser preenchido com cada entrada e saï¿½da correspondente. Por exemplo, se tiver uma ï¿½nica ocorrï¿½ncia, a posiï¿½ï¿½o 0 do vetor deve ser preenchido com o ï¿½ndice de inï¿½cio do texto, e na posiï¿½ï¿½o 1, deve ser preenchido com o ï¿½ndice de fim da ocorrencias. Se tiver duas ocorrï¿½ncias, a segunda ocorrï¿½ncia serï¿½ amazenado nas posiï¿½ï¿½es 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como hï¿½ uma ocorrï¿½ncia da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
         posicoes[0] = 13;
         posicoes[1] = 16;
-        Observe que o índice da posição no texto deve começar ser contado a partir de 1.
-        O retorno da função, n, nesse caso seria 1;
+        Observe que o ï¿½ndice da posiï¿½ï¿½o no texto deve comeï¿½ar ser contado a partir de 1.
+        O retorno da funï¿½ï¿½o, n, nesse caso seria 1;
 
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
@@ -484,13 +484,13 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 }
 
 /*
- Q5 = inverte número
+ Q5 = inverte nï¿½mero
  @objetivo
-    Inverter número inteiro
+    Inverter nï¿½mero inteiro
  @entrada
     uma int num.
  @saida
-    Número invertido
+    Nï¿½mero invertido
  */
 
 int q5(int num)
@@ -509,13 +509,13 @@ int q5(int num)
 }
 
 /*
- Q6 = ocorrência de um número em outro
+ Q6 = ocorrï¿½ncia de um nï¿½mero em outro
  @objetivo
-    Verificar quantidade de vezes da ocorrência de um número em outro
+    Verificar quantidade de vezes da ocorrï¿½ncia de um nï¿½mero em outro
  @entrada
-    Um número base (numerobase) e um número de busca (numerobusca).
+    Um nï¿½mero base (numerobase) e um nï¿½mero de busca (numerobusca).
  @saida
-    Quantidade de vezes que número de busca ocorre em número base
+    Quantidade de vezes que nï¿½mero de busca ocorre em nï¿½mero base
  */
 
 int q6(int numerobase, int numerobusca)
@@ -554,17 +554,17 @@ int q6(int numerobase, int numerobusca)
 /*
  Q7 = jogo busca palavras
  @objetivo
-    Verificar se existe uma string em uma matriz de caracteres em todas as direções e sentidos possíves
+    Verificar se existe uma string em uma matriz de caracteres em todas as direï¿½ï¿½es e sentidos possï¿½ves
  @entrada
     Uma matriz de caracteres e uma string de busca (palavra).
  @saida
-    1 se achou 0 se não achou
+    1 se achou 0 se nï¿½o achou
  */
 
  int q7(char matriz[8][10], char palavra[5])
  {
-     int achou;
-     return achou;
+    int achou = 0;
+    return achou;
  }
 
 
@@ -658,11 +658,11 @@ int diasNoMes(int mes, int ano)
 }
 
 
-void toLowerCase(char string[]){ // Função para mudar todas as letras para lowercase
+void toLowerCase(char string[]){ // Funï¿½ï¿½o para mudar todas as letras para lowercase
 
     for(int i = 0; string[i] != '\0'; i++){
         if(string[i] >= 'A' && string[i] <= 'Z'){
-            string[i] = string[i] + 32; //Faço +32 pois qualquer Letra maiuscula na tabela ASCII tem seu equivalente minusculo adicioonando 32 Ex: 'A' = 65 e 'a' = 97.
+            string[i] = string[i] + 32; //Faï¿½o +32 pois qualquer Letra maiuscula na tabela ASCII tem seu equivalente minusculo adicioonando 32 Ex: 'A' = 65 e 'a' = 97.
         }
     }
 }
